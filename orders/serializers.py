@@ -3,8 +3,8 @@ from .models import FoodOrder, OrderItem
 from menu.models import MenuItem
 
 class OrderItemSerializer(serializers.ModelSerializer):
-    menu_item = serializers.SlugRelatedField(queryset=MenuItem.objects.all(), slug_field='item')
-    price_per_unit = serializers.ReadOnlyField(source='price_per_unit')
+    menu_item = serializers.SlugRelatedField(queryset=MenuItem.objects.all(), slug_field='id')
+    price_per_unit = serializers.ReadOnlyField()
     total_price = serializers.ReadOnlyField()
 
     class Meta:

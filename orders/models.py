@@ -1,7 +1,10 @@
 from django.db import models
 from django.utils import timezone
 from menu.models import MenuItem
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 from users.models import CustomUser
+
 
 class FoodOrder(models.Model):
     STATUS_CHOICES = [
@@ -27,10 +30,6 @@ class FoodOrder(models.Model):
     def calculate_total_price(self):
         return sum(item.total_price for item in self.items.all())
 
-    def save(self, *args, **kwargs):
-        self.total_price = self.calculate_total_price()  # עדכון אוטומטי של המחיר הכולל
-        super().save(*args, **kwargs)
-
 class OrderItem(models.Model):
     order = models.ForeignKey(FoodOrder, on_delete=models.CASCADE, related_name='items')
     menu_item = models.ForeignKey(MenuItem, on_delete=models.CASCADE)
@@ -42,7 +41,14 @@ class OrderItem(models.Model):
 
     @property
     def total_price(self):
-        return self.quantity * self.menu_item.price
+        return self.quantity * self.price_per_unit
 
     def __str__(self):
         return f"{self.quantity} x {self.menu_item.name} for order {self.order.id}"
+
+# Signal to update total_price after the FoodOrder is saved
+@receiver(post_save, sender=FoodOrder)
+def update_total_price(sender, instance, created, **kwargs):
+    if created:
+        instance.total_price = sum(item.total_price for item in instance.items.all())
+        instance.save()
