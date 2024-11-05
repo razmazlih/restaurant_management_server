@@ -52,11 +52,11 @@
             </thead>
             <tbody>
                 <tr><td>GET</td><td><a href="/api/reservations/tables/">/api/reservations/tables/</a></td><td>קבלת רשימת כל השולחנות</td></tr>
-                <tr><td>POST</td><td><a href="/api/reservations/tables/">/api/reservations/tables/</a></td><td>יצירת שולחן חדש</td></tr>
+                <tr><td>POST</td><td><a href="/api/reservations/tables/">/api/reservations/tables/</a></td><td>יצירת שולחן חדש (למשתמשים עם הרשאת is_staff בלבד)</td></tr>
                 <tr><td>GET</td><td><a href="/api/reservations/reservations/">/api/reservations/reservations/</a></td><td>קבלת כל ההזמנות</td></tr>
-                <tr><td>POST</td><td><a href="/api/reservations/reservations/">/api/reservations/reservations/</a></td><td>יצירת הזמנה</td></tr>
-                <tr><td>PUT</td><td><a href="/api/reservations/reservations/1/">/api/reservations/reservations/&lt;id&gt;/</a></td><td>עדכון הזמנה</td></tr>
-                <tr><td>DELETE</td><td><a href="/api/reservations/reservations/1/">/api/reservations/reservations/&lt;id&gt;/</a></td><td>ביטול הזמנה</td></tr>
+                <tr><td>POST</td><td><a href="/api/reservations/reservations/create_reservation/">/api/reservations/reservations/create_reservation/</a></td><td>יצירת הזמנה חדשה</td></tr>
+                <tr><td>PUT</td><td><a href="/api/reservations/reservations/1/">/api/reservations/reservations/&lt;id&gt;/</a></td><td>עדכון הזמנה (למשתמשים עם הרשאת is_staff בלבד)</td></tr>
+                <tr><td>DELETE</td><td><a href="/api/reservations/reservations/1/">/api/reservations/reservations/&lt;id&gt;/</a></td><td>ביטול הזמנה (למשתמשים עם הרשאת is_staff בלבד)</td></tr>
             </tbody>
         </table>
 
