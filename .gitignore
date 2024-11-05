@@ -12,6 +12,8 @@ env/
 # קבצי הגדרות מערכת הפעלה
 .DS_Store
 
+migrations/
+
 # קבצי בסיס נתונים
 *.sqlite3
 
