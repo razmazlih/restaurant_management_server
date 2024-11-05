@@ -7,7 +7,7 @@ class Table(models.Model):
     number = models.IntegerField(unique=True)  # מספר מזהה של השולחן
     seats = models.IntegerField()  # מספר מקומות בשולחן
 
-    def is_available(self, date, duration=timedelta(hours=2)):
+    def is_available(self, date, duration=timedelta(hours=1)):
         start_time = date
         end_time = date + duration
 
