@@ -1,34 +1,42 @@
 from django.db import models
 from django.utils import timezone
-from datetime import timedelta
-from users.models import CustomUser
 
 class Table(models.Model):
-    number = models.IntegerField(unique=True)  # מספר מזהה של השולחן
-    seats = models.IntegerField()  # מספר מקומות בשולחן
+    number = models.IntegerField(unique=True)  # מספר מזהה לשולחן
+    seats = models.IntegerField()  # מספר המקומות
 
-    def is_available(self, date, duration=timedelta(hours=1)):
-        start_time = date
-        end_time = date + duration
-
-        # בדיקת זמינות לפי הזמנות קיימות
-        overlapping_reservations = Reservation.objects.filter(
+    def is_available(self, date_time):
+        """פונקציה לבדוק אם השולחן פנוי בזמן נתון"""
+        return not Reservation.objects.filter(
             table=self,
-            reservation_date__lt=end_time,
-            reservation_date__gte=start_time - models.F('duration')
-        )
-
-        return not overlapping_reservations.exists()
+            date_time=date_time
+        ).exists()
 
     def __str__(self):
-        return f"שולחן {self.number} - {self.seats} מקומות"
-
+        return f"שולחן {self.number} ({self.seats} מקומות)"
 
 class Reservation(models.Model):
-    table = models.ForeignKey(Table, on_delete=models.CASCADE)
-    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)  # מקשר משתמש להזמנה
-    reservation_date = models.DateTimeField(default=timezone.now)  # או כל ערך אחר
-    duration = models.DurationField(default=timezone.timedelta(hours=2))  # משך זמן שמירת השולחן
+    table = models.ForeignKey(Table, on_delete=models.CASCADE, related_name="reservations")
+    date_time = models.DateTimeField()
+    name = models.CharField(max_length=200)
+    phone = models.CharField(max_length=15)
 
     def __str__(self):
-        return f"הזמנה לשולחן {self.table.number} בתאריך {self.reservation_date.strftime('%Y-%m-%d %H:%M')}"
+        return f"הזמנה לשולחן {self.table.number} בתאריך {self.date_time.strftime('%Y-%m-%d %H:%M')}"
+
+    @staticmethod
+    def create_reservation(seats_needed, date_time):
+        """פונקציה לבחירת שולחן פנוי ושיבוץ הזמנה"""
+        available_table = Table.objects.filter(
+            seats__gte=seats_needed
+        ).exclude(
+            reservations__date_time=date_time
+        ).first()
+        
+        if available_table:
+            reservation = Reservation.objects.create(
+                table=available_table,
+                date_time=date_time
+            )
+            return reservation
+        return None
