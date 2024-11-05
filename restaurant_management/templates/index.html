@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="he">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>רשימת נתיבים - מערכת המסעדה</title>
+    <style>
+        body { font-family: Arial, sans-serif; direction: rtl; background-color: #f9f9f9; color: #333; }
+        h1 { text-align: center; color: #4CAF50; }
+        h2 { color: #4CAF50; margin-top: 20px; }
+        table { width: 100%; border-collapse: collapse; margin-bottom: 30px; }
+        th, td { padding: 12px; border: 1px solid #ddd; text-align: center; }
+        th { background-color: #4CAF50; color: white; }
+        tr:nth-child(even) { background-color: #f2f2f2; }
+        .container { max-width: 1200px; margin: auto; padding: 20px; }
+        a { color: #4CAF50; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>רשימת כל הנתיבים של מערכת המסעדה</h1>
+
+        <!-- אפליקציה: משתמשים -->
+        <h2>אפליקציית משתמשים (Users)</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Method</th>
+                    <th>URL</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>GET</td><td><a href="/api/users/">/api/users/</a></td><td>קבלת רשימת כל המשתמשים</td></tr>
+                <tr><td>POST</td><td><a href="/api/users/">/api/users/</a></td><td>יצירת משתמש חדש</td></tr>
+                <tr><td>GET</td><td><a href="/api/users/1/">/api/users/&lt;id&gt;/</a></td><td>קבלת פרטי משתמש מסוים</td></tr>
+                <tr><td>PUT</td><td><a href="/api/users/1/">/api/users/&lt;id&gt;/</a></td><td>עדכון פרטי משתמש</td></tr>
+                <tr><td>DELETE</td><td><a href="/api/users/1/">/api/users/&lt;id&gt;/</a></td><td>מחיקת משתמש מסוים</td></tr>
+            </tbody>
+        </table>
+
+        <!-- אפליקציה: הזמנות מקומות במסעדה -->
+        <h2>אפליקציית הזמנות מקומות (Reservations)</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Method</th>
+                    <th>URL</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>GET</td><td><a href="/api/reservations/tables/">/api/reservations/tables/</a></td><td>קבלת רשימת כל השולחנות</td></tr>
+                <tr><td>POST</td><td><a href="/api/reservations/tables/">/api/reservations/tables/</a></td><td>יצירת שולחן חדש</td></tr>
+                <tr><td>GET</td><td><a href="/api/reservations/reservations/">/api/reservations/reservations/</a></td><td>קבלת כל ההזמנות</td></tr>
+                <tr><td>POST</td><td><a href="/api/reservations/reservations/">/api/reservations/reservations/</a></td><td>יצירת הזמנה</td></tr>
+                <tr><td>PUT</td><td><a href="/api/reservations/reservations/1/">/api/reservations/reservations/&lt;id&gt;/</a></td><td>עדכון הזמנה</td></tr>
+                <tr><td>DELETE</td><td><a href="/api/reservations/reservations/1/">/api/reservations/reservations/&lt;id&gt;/</a></td><td>ביטול הזמנה</td></tr>
+            </tbody>
+        </table>
+
+        <!-- אפליקציה: תפריט (Menu) -->
+        <h2>אפליקציית תפריט (Menu)</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Method</th>
+                    <th>URL</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- נתיבים עבור MenuItem -->
+                <tr><td>GET</td><td><a href="/api/menu/menu_items/">/api/menu/menu_items/</a></td><td>קבלת רשימת כל פריטי התפריט</td></tr>
+                <tr><td>POST</td><td><a href="/api/menu/menu_items/">/api/menu/menu_items/</a></td><td>הוספת פריט חדש לתפריט</td></tr>
+                <tr><td>PUT</td><td><a href="/api/menu/menu_items/1/">/api/menu/menu_items/&lt;id&gt;/</a></td><td>עדכון פריט בתפריט</td></tr>
+                <tr><td>DELETE</td><td><a href="/api/menu/menu_items/1/">/api/menu/menu_items/&lt;id&gt;/</a></td><td>מחיקת פריט מהתפריט</td></tr>
+                
+                <!-- נתיבים עבור Category -->
+                <tr><td>GET</td><td><a href="/api/menu/categories/">/api/menu/categories/</a></td><td>קבלת רשימת כל הקטגוריות</td></tr>
+                <tr><td>POST</td><td><a href="/api/menu/categories/">/api/menu/categories/</a></td><td>הוספת קטגוריה חדשה</td></tr>
+                <tr><td>PUT</td><td><a href="/api/menu/categories/1/">/api/menu/categories/&lt;id&gt;/</a></td><td>עדכון קטגוריה</td></tr>
+                <tr><td>DELETE</td><td><a href="/api/menu/categories/1/">/api/menu/categories/&lt;id&gt;/</a></td><td>מחיקת קטגוריה</td></tr>
+            </tbody>
+        </table>
+
+        <!-- אפליקציה: הזמנות אוכל (Orders) -->
+        <h2>אפליקציית הזמנות אוכל (Orders)</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Method</th>
+                    <th>URL</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>GET</td><td><a href="/api/orders/orders/">/api/orders/orders/</a></td><td>קבלת רשימת כל ההזמנות</td></tr>
+                <tr><td>POST</td><td><a href="/api/orders/orders/">/api/orders/orders/</a></td><td>יצירת הזמנה חדשה</td></tr>
+                <tr><td>GET</td><td><a href="/api/orders/orders/1/">/api/orders/orders/&lt;id&gt;/</a></td><td>קבלת פרטי הזמנה מסוימת</td></tr>
+                <tr><td>PUT</td><td><a href="/api/orders/orders/1/">/api/orders/orders/&lt;id&gt;/</a></td><td>עדכון סטטוס או פרטי הזמנה</td></tr>
+                <tr><td>DELETE</td><td><a href="/api/orders/orders/1/">/api/orders/orders/&lt;id&gt;/</a></td><td>ביטול הזמנה</td></tr>
+                
+                <!-- הוספת טבלה עבור פריטי הזמנה -->
+                <tr><td>GET</td><td><a href="/api/orders/order_items/">/api/orders/order_items/</a></td><td>קבלת רשימת כל פריטי ההזמנה</td></tr>
+                <tr><td>POST</td><td><a href="/api/orders/order_items/">/api/orders/order_items/</a></td><td>יצירת פריט הזמנה חדש</td></tr>
+                <tr><td>GET</td><td><a href="/api/orders/order_items/1/">/api/orders/order_items/&lt;id&gt;/</a></td><td>קבלת פרטי פריט הזמנה מסוים</td></tr>
+                <tr><td>PUT</td><td><a href="/api/orders/order_items/1/">/api/orders/order_items/&lt;id&gt;/</a></td><td>עדכון פריט הזמנה</td></tr>
+                <tr><td>DELETE</td><td><a href="/api/orders/order_items/1/">/api/orders/order_items/&lt;id&gt;/</a></td><td>מחיקת פריט הזמנה</td></tr>
+            </tbody>
+        </table>
+
+        <!-- אפליקציה: תשלומים (Payments) -->
+        <h2>אפליקציית תשלומים (Payments)</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Method</th>
+                    <th>URL</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>GET</td><td><a href="/api/payments/">/api/payments/</a></td><td>קבלת רשימת כל התשלומים</td></tr>
+                <tr><td>POST</td><td><a href="/api/payments/">/api/payments/</a></td><td>עיבוד תשלום עבור הזמנה</td></tr>
+                <tr><td>GET</td><td><a href="/api/payments/1/">/api/payments/&lt;id&gt;/</a></td><td>קבלת פרטי תשלום מסוים</td></tr>
+                <tr><td>PUT</td><td><a href="/api/payments/1/">/api/payments/&lt;id&gt;/</a></td><td>עדכון סטטוס תשלום</td></tr>
+                <tr><td>DELETE</td><td><a href="/api/payments/1/refund/">/api/payments/&lt;id&gt;/refund/</a></td><td>החזר תשלום</td></tr>
+            </tbody>
+        </table>
+
+    </div>
+</body>
+</html>
