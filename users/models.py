@@ -10,6 +10,7 @@ class CustomUser(AbstractUser):
 
     role = models.CharField(max_length=10, choices=ROLE_CHOICES, default='customer')
     address = models.CharField(max_length=255, blank=True, null=True)
+    city = models.CharField(max_length=255, blank=True, null=True)
     phone_number = models.CharField(max_length=15, blank=True, null=True)
     is_staff_member = models.BooleanField(default=False, editable=False)
     loyalty_points = models.IntegerField(default=0)
