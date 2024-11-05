@@ -1,19 +1,14 @@
 from rest_framework import serializers
-from .models import MenuItem, Category
+from .models import MenuCategory, MenuItem
 
 class MenuItemSerializer(serializers.ModelSerializer):
     class Meta:
         model = MenuItem
-        fields = ['id', 'name', 'description', 'price', 'is_available']
+        fields = ['id', 'category', 'name', 'description', 'price', 'is_available', 'image']
 
-    def validate_price(self, value):
-        if value <= 0:
-            raise serializers.ValidationError("The price must be greater than zero.")
-        return value
-
-class CategorySerializer(serializers.ModelSerializer):
+class MenuCategorySerializer(serializers.ModelSerializer):
     items = MenuItemSerializer(many=True, read_only=True)
 
     class Meta:
-        model = Category
-        fields = ['id', 'name', 'items']
+        model = MenuCategory
+        fields = ['id', 'name', 'description', 'items']

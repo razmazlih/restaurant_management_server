@@ -1,14 +1,13 @@
 from django.contrib import admin
-from .models import MenuItem, Category
+from .models import MenuCategory, MenuItem
+
+@admin.register(MenuCategory)
+class MenuCategoryAdmin(admin.ModelAdmin):
+    list_display = ('name', 'description')
+    search_fields = ('name',)
 
 @admin.register(MenuItem)
 class MenuItemAdmin(admin.ModelAdmin):
-    list_display = ('name', 'price', 'is_available')
-    list_filter = ('is_available',)
+    list_display = ('name', 'category', 'price', 'is_available')
+    list_filter = ('is_available', 'category')
     search_fields = ('name', 'description')
-
-@admin.register(Category)
-class CategoryAdmin(admin.ModelAdmin):
-    list_display = ('name',)
-    search_fields = ('name',)
-    filter_horizontal = ('items',)  # מאפשר לבחור פריטי תפריט לקטגוריה בצורה נוחה
