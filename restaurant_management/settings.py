@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     'orders',
     'payments',
     'corsheaders',
+    'cloudinary',
+    'cloudinary_storage',
 ]
 
 MIDDLEWARE = [
@@ -116,6 +118,16 @@ TIME_ZONE = "Asia/Jerusalem"
 USE_I18N = True
 
 USE_TZ = True
+
+DEFAULT_FILE_STORAGE = os.getenv('DEFAULT_FILE_STORAGE')
+
+# הגדרת Cloudinary
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': os.getenv('CLOUD_NAME'),
+    'API_KEY': os.getenv('API_KEY'),
+    'API_SECRET': os.getenv('API_SECRET'),
+    'SECURE': os.getenv('SECURE') == 'True',
+}
 
 
 STATIC_URL = '/static/'
