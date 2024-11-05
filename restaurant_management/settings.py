@@ -2,6 +2,7 @@ import os
 from dotenv import load_dotenv
 from pathlib import Path
 import dj_database_url
+from datetime import timedelta
 
 # טוען את משתני הסביבה מהקובץ .env
 load_dotenv()
@@ -37,7 +38,6 @@ INSTALLED_APPS = [
     'reservations',
     'menu',
     'orders',
-    'payments',
     'corsheaders',
     'cloudinary',
     'cloudinary_storage',
@@ -59,7 +59,7 @@ ROOT_URLCONF = "restaurant_management.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        'DIRS': [BASE_DIR / "restaurant_management" /"templates"],
+        'DIRS': [BASE_DIR /"restaurant_management" /"templates"],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -103,8 +103,6 @@ AUTH_PASSWORD_VALIDATORS = [
         "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
     },
 ]
-
-from datetime import timedelta
 
 SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(minutes=30),

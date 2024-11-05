@@ -9,7 +9,7 @@ urlpatterns = [
     path('api/reservations/', include('reservations.urls')),
     path('api/menu/', include('menu.urls')),
     path('api/orders/', include('orders.urls')),
-    path('api/payments/', include('payments.urls')),
+    # path('api/payments/', include('payments.urls')),
     path('api/login/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('', index, name='index'),

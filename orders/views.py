@@ -1,11 +1,15 @@
 from rest_framework import viewsets
-from .models import Order, OrderItem
-from .serializers import OrderSerializer, OrderItemSerializer
+from rest_framework.permissions import IsAuthenticated
+from .models import FoodOrder
+from .serializers import FoodOrderSerializer
 
-class OrderViewSet(viewsets.ModelViewSet):
-    queryset = Order.objects.all()
-    serializer_class = OrderSerializer
+class FoodOrderViewSet(viewsets.ModelViewSet):
+    queryset = FoodOrder.objects.all()
+    serializer_class = FoodOrderSerializer
+    permission_classes = [IsAuthenticated]
 
-class OrderItemViewSet(viewsets.ModelViewSet):
-    queryset = OrderItem.objects.all()
-    serializer_class = OrderItemSerializer
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
+
+    def get_queryset(self):
+        return self.queryset.filter(user=self.request.user)

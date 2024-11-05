@@ -1,13 +1,14 @@
 from django.contrib import admin
-from .models import Order, OrderItem
+from .models import FoodOrder, OrderItem
 
-@admin.register(Order)
-class OrderAdmin(admin.ModelAdmin):
-    list_display = ('id', 'customer', 'created_at', 'total_price')
-    search_fields = ('customer__username',)  # מאפשר חיפוש לפי שם המשתמש
-    date_hierarchy = 'created_at'  # מאפשר סינון לפי תאריך ההזמנה
+class OrderItemInline(admin.TabularInline):
+    model = OrderItem
+    extra = 1
 
-@admin.register(OrderItem)
-class OrderItemAdmin(admin.ModelAdmin):
-    list_display = ('id', 'order', 'menu_item', 'quantity', 'price')
-    search_fields = ('order__id', 'menu_item__name')  # מאפשר חיפוש לפי מזהה הזמנה ושם פריט
+class FoodOrderAdmin(admin.ModelAdmin):
+    list_display = ['id', 'user', 'address', 'order_date', 'delivery_date', 'status', 'total_price']
+    list_filter = ['status', 'order_date']
+    search_fields = ['user__username', 'address']
+    inlines = [OrderItemInline]
+
+admin.site.register(FoodOrder, FoodOrderAdmin)
