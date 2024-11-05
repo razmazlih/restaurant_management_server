@@ -1,14 +1,32 @@
 from rest_framework import viewsets, status
 from rest_framework.decorators import action
 from rest_framework.response import Response
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.exceptions import PermissionDenied
 from .models import Table, Reservation
 from .serializers import TableSerializer, ReservationSerializer, CreateReservationSerializer
 
-class TableViewSet(viewsets.ReadOnlyModelViewSet):
+class TableViewSet(viewsets.ModelViewSet):
     queryset = Table.objects.all()
     serializer_class = TableSerializer
+    permission_classes = [IsAuthenticated]  # נוודא שכל המשתמשים מחוברים כדי לצפות בשולחנות
 
-class ReservationViewSet(viewsets.ModelViewSet):
+    def perform_create(self, serializer):
+        if not self.request.user.is_staff:
+            raise PermissionDenied("רק משתמשים עם הרשאת Staff יכולים להוסיף שולחנות.")
+        serializer.save()
+
+    def perform_update(self, serializer):
+        if not self.request.user.is_staff:
+            raise PermissionDenied("רק משתמשים עם הרשאת Staff יכולים לערוך שולחנות.")
+        serializer.save()
+
+    def perform_destroy(self, instance):
+        if not self.request.user.is_staff:
+            raise PermissionDenied("רק משתמשים עם הרשאת Staff יכולים למחוק שולחנות.")
+        instance.delete()
+
+class ReservationViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Reservation.objects.all()
     serializer_class = ReservationSerializer
 
