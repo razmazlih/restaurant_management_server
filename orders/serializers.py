@@ -1,9 +1,8 @@
 from rest_framework import serializers
 from .models import FoodOrder, OrderItem
-from menu.models import MenuItem
 
 class OrderItemSerializer(serializers.ModelSerializer):
-    menu_item = serializers.SlugRelatedField(queryset=MenuItem.objects.all(), slug_field='id')
+    menu_item = serializers.CharField(source='menu_item.name', read_only=True)
     price_per_unit = serializers.ReadOnlyField()
     total_price = serializers.ReadOnlyField()
 

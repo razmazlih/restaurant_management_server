@@ -12,4 +12,7 @@ class FoodOrderViewSet(viewsets.ModelViewSet):
         serializer.save(user=self.request.user)
 
     def get_queryset(self):
-        return self.queryset.filter(user=self.request.user)
+        user = self.request.user
+        if user.is_staff_member:
+            return self.queryset.all()
+        return self.queryset.filter(user=user)
