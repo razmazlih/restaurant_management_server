@@ -2,10 +2,6 @@ from rest_framework import viewsets, permissions
 from .models import CustomUser
 from .serializers import UserSerializer
 
-from rest_framework import permissions
-
-from rest_framework import permissions
-
 class IsManagerOrOwnerWithPostPermission(permissions.BasePermission):
     """
     Custom permission:
