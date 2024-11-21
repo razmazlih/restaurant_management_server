@@ -31,12 +31,12 @@
    cd restaurant_management_server
    ```
 
-2. **התקנת חבילות**:
+2. **Installing packages**:
    ```bash
    pip install -r requirements.txt
    ```
 
-3. **הגדרת קובץ `.env`**:
+3. **Defining the `.env` file**:
    צור קובץ `.env` בתיקייה הראשית עם המשתנים הבאים:
    ```env
    DATABASE_URL=<הכתובת של מסד הנתונים>
@@ -45,12 +45,12 @@
    CORS_ALLOWED_ORIGINS=<דומיינים מאושרים לצד לקוח>
    ```
 
-4. **הפעלת מיגרציות**:
+4. **Running migrations**:
    ```bash
    python manage.py migrate
    ```
 
-5. **הרצת השרת**:
+5. **Running the server**:
    ```bash
    python manage.py runserver
    ```
